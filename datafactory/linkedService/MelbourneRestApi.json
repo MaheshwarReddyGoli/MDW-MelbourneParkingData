@@ -1,0 +1,17 @@
+{
+	"name": "MelbourneRestApi",
+	"properties": {
+		"parameters": {
+			"relativeurl": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestService",
+		"typeProperties": {
+			"url": "@{linkedService().relativeurl}",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Anonymous"
+		}
+	}
+}
