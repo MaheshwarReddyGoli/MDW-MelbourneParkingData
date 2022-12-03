@@ -5,7 +5,15 @@
 			"referenceName": "MelbourneRestApi",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"relativeurl": "https://data.melbourne.vic.gov.au/resource/vh2v-4nfs.json"
+				"relativeurl": {
+					"value": "@dataset().apiurl",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"apiurl": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
