@@ -25,6 +25,112 @@
 						}
 					},
 					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['parking_zone']"
+								},
+								"sink": {
+									"path": "$['parking_zone']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['bay_id']"
+								},
+								"sink": {
+									"path": "$['bay_id']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['st_marker_id']"
+								},
+								"sink": {
+									"path": "$['st_marker_id']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['status']"
+								},
+								"sink": {
+									"path": "$['status']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['lat']"
+								},
+								"sink": {
+									"path": "$['lat']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['lon']"
+								},
+								"sink": {
+									"path": "$['lon']"
+								}
+							}
+						],
+						"collectionReference": ""
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "MelbourneApiDataset",
+						"type": "DatasetReference",
+						"parameters": {
+							"apiurl": "https://data.melbourne.vic.gov.au/resource/vh2v-4nfs.json"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "MelbourneADLS2",
+						"type": "DatasetReference",
+						"parameters": {
+							"filename": "ParkingBaySensors.json"
+						}
+					}
+				]
+			},
+			{
+				"name": "Car Park Bay Restrictions",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"paginationRules": {
+							"supportRFC5988": "true"
+						}
+					},
+					"sink": {
 						"type": "DelimitedTextSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
@@ -41,50 +147,250 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['parking_zone']"
+									"path": "$['bayid']"
 								},
 								"sink": {
-									"name": "parking_zone"
+									"name": "bayid"
 								}
 							},
 							{
 								"source": {
-									"path": "$['bay_id']"
+									"path": "$['deviceid']"
 								},
 								"sink": {
-									"name": "bay_id"
+									"name": "deviceid"
 								}
 							},
 							{
 								"source": {
-									"path": "$['st_marker_id']"
+									"path": "$['description1']"
 								},
 								"sink": {
-									"name": "st_marker_id"
+									"name": "description1"
 								}
 							},
 							{
 								"source": {
-									"path": "$['status']"
+									"path": "$['description2']"
 								},
 								"sink": {
-									"name": "status"
+									"name": "description2"
 								}
 							},
 							{
 								"source": {
-									"path": "$['lat']"
+									"path": "$['description3']"
 								},
 								"sink": {
-									"name": "lat"
+									"name": "description3"
 								}
 							},
 							{
 								"source": {
-									"path": "$['lon']"
+									"path": "$['disabilityext1']"
 								},
 								"sink": {
-									"name": "lon"
+									"name": "disabilityext1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['disabilityext2']"
+								},
+								"sink": {
+									"name": "disabilityext2"
+								}
+							},
+							{
+								"source": {
+									"path": "$['disabilityext3']"
+								},
+								"sink": {
+									"name": "disabilityext3"
+								}
+							},
+							{
+								"source": {
+									"path": "$['duration1']"
+								},
+								"sink": {
+									"name": "duration1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['duration2']"
+								},
+								"sink": {
+									"name": "duration2"
+								}
+							},
+							{
+								"source": {
+									"path": "$['duration3']"
+								},
+								"sink": {
+									"name": "duration3"
+								}
+							},
+							{
+								"source": {
+									"path": "$['effectiveonph1']"
+								},
+								"sink": {
+									"name": "effectiveonph1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['effectiveonph2']"
+								},
+								"sink": {
+									"name": "effectiveonph2"
+								}
+							},
+							{
+								"source": {
+									"path": "$['effectiveonph3']"
+								},
+								"sink": {
+									"name": "effectiveonph3"
+								}
+							},
+							{
+								"source": {
+									"path": "$['endtime1']"
+								},
+								"sink": {
+									"name": "endtime1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['endtime2']"
+								},
+								"sink": {
+									"name": "endtime2"
+								}
+							},
+							{
+								"source": {
+									"path": "$['endtime3']"
+								},
+								"sink": {
+									"name": "endtime3"
+								}
+							},
+							{
+								"source": {
+									"path": "$['fromday1']"
+								},
+								"sink": {
+									"name": "fromday1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['fromday2']"
+								},
+								"sink": {
+									"name": "fromday2"
+								}
+							},
+							{
+								"source": {
+									"path": "$['fromday3']"
+								},
+								"sink": {
+									"name": "fromday3"
+								}
+							},
+							{
+								"source": {
+									"path": "$['starttime1']"
+								},
+								"sink": {
+									"name": "starttime1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['starttime2']"
+								},
+								"sink": {
+									"name": "starttime2"
+								}
+							},
+							{
+								"source": {
+									"path": "$['starttime3']"
+								},
+								"sink": {
+									"name": "starttime3"
+								}
+							},
+							{
+								"source": {
+									"path": "$['today1']"
+								},
+								"sink": {
+									"name": "today1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['today2']"
+								},
+								"sink": {
+									"name": "today2"
+								}
+							},
+							{
+								"source": {
+									"path": "$['today3']"
+								},
+								"sink": {
+									"name": "today3"
+								}
+							},
+							{
+								"source": {
+									"path": "$['typedesc1']"
+								},
+								"sink": {
+									"name": "typedesc1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['typedesc2']"
+								},
+								"sink": {
+									"name": "typedesc2"
+								}
+							},
+							{
+								"source": {
+									"path": "$['typedesc3']"
+								},
+								"sink": {
+									"name": "typedesc3"
+								}
+							},
+							{
+								"source": {
+									"path": "$['exemption1']"
+								},
+								"sink": {
+									"name": "exemption1"
+								}
+							},
+							{
+								"source": {
+									"path": "$['exemption2']"
+								},
+								"sink": {
+									"name": "exemption2"
 								}
 							}
 						]
@@ -95,7 +401,7 @@
 						"referenceName": "MelbourneApiDataset",
 						"type": "DatasetReference",
 						"parameters": {
-							"apiurl": "https://data.melbourne.vic.gov.au/resource/vh2v-4nfs.json"
+							"apiurl": "https://data.melbourne.vic.gov.au/resource/ntht-5rk7.json"
 						}
 					}
 				],
@@ -104,7 +410,7 @@
 						"referenceName": "MelbourneADLS",
 						"type": "DatasetReference",
 						"parameters": {
-							"filename": "ParkingBaySensors.csv"
+							"filename": "CarParkBayRestrictions.csv"
 						}
 					}
 				]
