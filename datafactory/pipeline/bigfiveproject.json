@@ -131,14 +131,12 @@
 						}
 					},
 					"sink": {
-						"type": "DelimitedTextSink",
+						"type": "JsonSink",
 						"storeSettings": {
 							"type": "AzureBlobFSWriteSettings"
 						},
 						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
+							"type": "JsonWriteSettings"
 						}
 					},
 					"enableStaging": false,
@@ -150,7 +148,7 @@
 									"path": "$['bayid']"
 								},
 								"sink": {
-									"name": "bayid"
+									"path": "$['bayid']"
 								}
 							},
 							{
@@ -158,7 +156,7 @@
 									"path": "$['deviceid']"
 								},
 								"sink": {
-									"name": "deviceid"
+									"path": "$['deviceid']"
 								}
 							},
 							{
@@ -166,7 +164,7 @@
 									"path": "$['description1']"
 								},
 								"sink": {
-									"name": "description1"
+									"path": "$['description1']"
 								}
 							},
 							{
@@ -174,7 +172,7 @@
 									"path": "$['description2']"
 								},
 								"sink": {
-									"name": "description2"
+									"path": "$['description2']"
 								}
 							},
 							{
@@ -182,7 +180,7 @@
 									"path": "$['description3']"
 								},
 								"sink": {
-									"name": "description3"
+									"path": "$['description3']"
 								}
 							},
 							{
@@ -190,7 +188,7 @@
 									"path": "$['disabilityext1']"
 								},
 								"sink": {
-									"name": "disabilityext1"
+									"path": "$['disabilityext1']"
 								}
 							},
 							{
@@ -198,7 +196,7 @@
 									"path": "$['disabilityext2']"
 								},
 								"sink": {
-									"name": "disabilityext2"
+									"path": "$['disabilityext2']"
 								}
 							},
 							{
@@ -206,7 +204,7 @@
 									"path": "$['disabilityext3']"
 								},
 								"sink": {
-									"name": "disabilityext3"
+									"path": "$['disabilityext3']"
 								}
 							},
 							{
@@ -214,7 +212,7 @@
 									"path": "$['duration1']"
 								},
 								"sink": {
-									"name": "duration1"
+									"path": "$['duration1']"
 								}
 							},
 							{
@@ -222,7 +220,7 @@
 									"path": "$['duration2']"
 								},
 								"sink": {
-									"name": "duration2"
+									"path": "$['duration2']"
 								}
 							},
 							{
@@ -230,7 +228,7 @@
 									"path": "$['duration3']"
 								},
 								"sink": {
-									"name": "duration3"
+									"path": "$['duration3']"
 								}
 							},
 							{
@@ -238,7 +236,7 @@
 									"path": "$['effectiveonph1']"
 								},
 								"sink": {
-									"name": "effectiveonph1"
+									"path": "$['effectiveonph1']"
 								}
 							},
 							{
@@ -246,7 +244,7 @@
 									"path": "$['effectiveonph2']"
 								},
 								"sink": {
-									"name": "effectiveonph2"
+									"path": "$['effectiveonph2']"
 								}
 							},
 							{
@@ -254,7 +252,7 @@
 									"path": "$['effectiveonph3']"
 								},
 								"sink": {
-									"name": "effectiveonph3"
+									"path": "$['effectiveonph3']"
 								}
 							},
 							{
@@ -262,7 +260,7 @@
 									"path": "$['endtime1']"
 								},
 								"sink": {
-									"name": "endtime1"
+									"path": "$['endtime1']"
 								}
 							},
 							{
@@ -270,7 +268,7 @@
 									"path": "$['endtime2']"
 								},
 								"sink": {
-									"name": "endtime2"
+									"path": "$['endtime2']"
 								}
 							},
 							{
@@ -278,7 +276,7 @@
 									"path": "$['endtime3']"
 								},
 								"sink": {
-									"name": "endtime3"
+									"path": "$['endtime3']"
 								}
 							},
 							{
@@ -286,7 +284,7 @@
 									"path": "$['fromday1']"
 								},
 								"sink": {
-									"name": "fromday1"
+									"path": "$['fromday1']"
 								}
 							},
 							{
@@ -294,7 +292,7 @@
 									"path": "$['fromday2']"
 								},
 								"sink": {
-									"name": "fromday2"
+									"path": "$['fromday2']"
 								}
 							},
 							{
@@ -302,7 +300,7 @@
 									"path": "$['fromday3']"
 								},
 								"sink": {
-									"name": "fromday3"
+									"path": "$['fromday3']"
 								}
 							},
 							{
@@ -310,7 +308,7 @@
 									"path": "$['starttime1']"
 								},
 								"sink": {
-									"name": "starttime1"
+									"path": "$['starttime1']"
 								}
 							},
 							{
@@ -318,7 +316,7 @@
 									"path": "$['starttime2']"
 								},
 								"sink": {
-									"name": "starttime2"
+									"path": "$['starttime2']"
 								}
 							},
 							{
@@ -326,7 +324,7 @@
 									"path": "$['starttime3']"
 								},
 								"sink": {
-									"name": "starttime3"
+									"path": "$['starttime3']"
 								}
 							},
 							{
@@ -334,7 +332,7 @@
 									"path": "$['today1']"
 								},
 								"sink": {
-									"name": "today1"
+									"path": "$['today1']"
 								}
 							},
 							{
@@ -342,7 +340,7 @@
 									"path": "$['today2']"
 								},
 								"sink": {
-									"name": "today2"
+									"path": "$['today2']"
 								}
 							},
 							{
@@ -350,7 +348,7 @@
 									"path": "$['today3']"
 								},
 								"sink": {
-									"name": "today3"
+									"path": "$['today3']"
 								}
 							},
 							{
@@ -358,7 +356,7 @@
 									"path": "$['typedesc1']"
 								},
 								"sink": {
-									"name": "typedesc1"
+									"path": "$['typedesc1']"
 								}
 							},
 							{
@@ -366,7 +364,7 @@
 									"path": "$['typedesc2']"
 								},
 								"sink": {
-									"name": "typedesc2"
+									"path": "$['typedesc2']"
 								}
 							},
 							{
@@ -374,7 +372,7 @@
 									"path": "$['typedesc3']"
 								},
 								"sink": {
-									"name": "typedesc3"
+									"path": "$['typedesc3']"
 								}
 							},
 							{
@@ -382,7 +380,7 @@
 									"path": "$['exemption1']"
 								},
 								"sink": {
-									"name": "exemption1"
+									"path": "$['exemption1']"
 								}
 							},
 							{
@@ -390,10 +388,11 @@
 									"path": "$['exemption2']"
 								},
 								"sink": {
-									"name": "exemption2"
+									"path": "$['exemption2']"
 								}
 							}
-						]
+						],
+						"collectionReference": ""
 					}
 				},
 				"inputs": [
@@ -407,10 +406,10 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "MelbourneADLS",
+						"referenceName": "MelbourneADLS2",
 						"type": "DatasetReference",
 						"parameters": {
-							"filename": "CarParkBayRestrictions.csv"
+							"filename": "CarParkBayRestrictions.json"
 						}
 					}
 				]
