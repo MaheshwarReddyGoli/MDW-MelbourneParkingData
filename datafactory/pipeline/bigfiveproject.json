@@ -71,6 +71,22 @@
 							},
 							{
 								"source": {
+									"path": "$['location']['latitude']"
+								},
+								"sink": {
+									"path": "$['location']['latitude']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['location']['longitude']"
+								},
+								"sink": {
+									"path": "$['location']['longitude']"
+								}
+							},
+							{
+								"source": {
 									"path": "$['lat']"
 								},
 								"sink": {
@@ -83,6 +99,14 @@
 								},
 								"sink": {
 									"path": "$['lon']"
+								}
+							},
+							{
+								"source": {
+									"path": "$[':@computed_region_evbi_jbp8']"
+								},
+								"sink": {
+									"path": "$[':@computed_region_evbi_jbp8']"
 								}
 							}
 						],
