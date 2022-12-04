@@ -19,7 +19,8 @@
 					"value": "@dataset().filename",
 					"type": "Expression"
 				},
-				"fileSystem": "landing"
+				"folderPath": "landing",
+				"fileSystem": "bigfiveproject"
 			}
 		},
 		"schema": {}
