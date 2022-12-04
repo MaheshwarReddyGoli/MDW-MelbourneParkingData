@@ -71,6 +71,22 @@
 							},
 							{
 								"source": {
+									"path": "$['location']['latitude']"
+								},
+								"sink": {
+									"path": "$['location']['latitude']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['location']['longitude']"
+								},
+								"sink": {
+									"path": "$['location']['longitude']"
+								}
+							},
+							{
+								"source": {
 									"path": "$['lat']"
 								},
 								"sink": {
@@ -83,6 +99,14 @@
 								},
 								"sink": {
 									"path": "$['lon']"
+								}
+							},
+							{
+								"source": {
+									"path": "$[':@computed_region_evbi_jbp8']"
+								},
+								"sink": {
+									"path": "$[':@computed_region_evbi_jbp8']"
 								}
 							}
 						],
@@ -441,6 +465,33 @@
 				"userProperties": [],
 				"typeProperties": {
 					"notebookPath": "/Repos/s545526@nwmissouri.edu/MDW-MelbourneParkingData/Databricks/CleaningNotebookV3"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "TransformNotebookP1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "DataCleaning",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/s545526@nwmissouri.edu/MDW-MelbourneParkingData/Databricks/TransformNotebookP1"
 				},
 				"linkedServiceName": {
 					"referenceName": "AzureDatabricks",
