@@ -1,0 +1,28 @@
+{
+	"name": "MelbourneADLS2",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "storagebigfiveproject",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"filename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().filename",
+					"type": "Expression"
+				},
+				"folderPath": "landing",
+				"fileSystem": "bigfiveproject"
+			}
+		},
+		"schema": {}
+	}
+}

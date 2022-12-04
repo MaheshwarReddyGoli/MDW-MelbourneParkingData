@@ -1,0 +1,23 @@
+{
+	"name": "MelbourneApiDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MelbourneRestApi",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"relativeurl": {
+					"value": "@dataset().apiurl",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"apiurl": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
