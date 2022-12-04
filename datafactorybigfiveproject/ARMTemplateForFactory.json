@@ -1,0 +1,668 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "datafactorybigfiveproject"
+		},
+		"AzureDatabricks_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricks'"
+		},
+		"storagebigfiveproject_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'storagebigfiveproject'"
+		},
+		"AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "1203-175915-gsdmd9ua"
+		},
+		"MelbourneRestApi_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "@{linkedService().relativeurl}"
+		},
+		"storagebigfiveproject_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://storagebigfiveproject.dfs.core.windows.net/"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/bigfiveproject')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Parking Bay Sensors",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['parking_zone']"
+										},
+										"sink": {
+											"path": "$['parking_zone']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['bay_id']"
+										},
+										"sink": {
+											"path": "$['bay_id']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['st_marker_id']"
+										},
+										"sink": {
+											"path": "$['st_marker_id']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['status']"
+										},
+										"sink": {
+											"path": "$['status']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['location']['latitude']"
+										},
+										"sink": {
+											"path": "$['location']['latitude']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['location']['longitude']"
+										},
+										"sink": {
+											"path": "$['location']['longitude']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lat']"
+										},
+										"sink": {
+											"path": "$['lat']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lon']"
+										},
+										"sink": {
+											"path": "$['lon']"
+										}
+									},
+									{
+										"source": {
+											"path": "$[':@computed_region_evbi_jbp8']"
+										},
+										"sink": {
+											"path": "$[':@computed_region_evbi_jbp8']"
+										}
+									}
+								],
+								"collectionReference": ""
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "MelbourneApiDataset",
+								"type": "DatasetReference",
+								"parameters": {
+									"apiurl": "https://data.melbourne.vic.gov.au/resource/vh2v-4nfs.json"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "MelbourneADLS2",
+								"type": "DatasetReference",
+								"parameters": {
+									"filename": "ParkingBaySensors.json"
+								}
+							}
+						]
+					},
+					{
+						"name": "Car Park Bay Restrictions",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "JsonSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "JsonWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['bayid']"
+										},
+										"sink": {
+											"path": "$['bayid']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['deviceid']"
+										},
+										"sink": {
+											"path": "$['deviceid']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['description1']"
+										},
+										"sink": {
+											"path": "$['description1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['description2']"
+										},
+										"sink": {
+											"path": "$['description2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['description3']"
+										},
+										"sink": {
+											"path": "$['description3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['disabilityext1']"
+										},
+										"sink": {
+											"path": "$['disabilityext1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['disabilityext2']"
+										},
+										"sink": {
+											"path": "$['disabilityext2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['disabilityext3']"
+										},
+										"sink": {
+											"path": "$['disabilityext3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['duration1']"
+										},
+										"sink": {
+											"path": "$['duration1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['duration2']"
+										},
+										"sink": {
+											"path": "$['duration2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['duration3']"
+										},
+										"sink": {
+											"path": "$['duration3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['effectiveonph1']"
+										},
+										"sink": {
+											"path": "$['effectiveonph1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['effectiveonph2']"
+										},
+										"sink": {
+											"path": "$['effectiveonph2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['effectiveonph3']"
+										},
+										"sink": {
+											"path": "$['effectiveonph3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['endtime1']"
+										},
+										"sink": {
+											"path": "$['endtime1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['endtime2']"
+										},
+										"sink": {
+											"path": "$['endtime2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['endtime3']"
+										},
+										"sink": {
+											"path": "$['endtime3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['fromday1']"
+										},
+										"sink": {
+											"path": "$['fromday1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['fromday2']"
+										},
+										"sink": {
+											"path": "$['fromday2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['fromday3']"
+										},
+										"sink": {
+											"path": "$['fromday3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['starttime1']"
+										},
+										"sink": {
+											"path": "$['starttime1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['starttime2']"
+										},
+										"sink": {
+											"path": "$['starttime2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['starttime3']"
+										},
+										"sink": {
+											"path": "$['starttime3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['today1']"
+										},
+										"sink": {
+											"path": "$['today1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['today2']"
+										},
+										"sink": {
+											"path": "$['today2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['today3']"
+										},
+										"sink": {
+											"path": "$['today3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['typedesc1']"
+										},
+										"sink": {
+											"path": "$['typedesc1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['typedesc2']"
+										},
+										"sink": {
+											"path": "$['typedesc2']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['typedesc3']"
+										},
+										"sink": {
+											"path": "$['typedesc3']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['exemption1']"
+										},
+										"sink": {
+											"path": "$['exemption1']"
+										}
+									},
+									{
+										"source": {
+											"path": "$['exemption2']"
+										},
+										"sink": {
+											"path": "$['exemption2']"
+										}
+									}
+								],
+								"collectionReference": ""
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "MelbourneApiDataset",
+								"type": "DatasetReference",
+								"parameters": {
+									"apiurl": "https://data.melbourne.vic.gov.au/resource/ntht-5rk7.json"
+								}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "MelbourneADLS2",
+								"type": "DatasetReference",
+								"parameters": {
+									"filename": "CarParkBayRestrictions.json"
+								}
+							}
+						]
+					},
+					{
+						"name": "DataCleaning",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "Parking Bay Sensors",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "Car Park Bay Restrictions",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/s545526@nwmissouri.edu/MDW-MelbourneParkingData/Databricks/CleaningNotebookV3"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "TransformNotebookP1",
+						"type": "DatabricksNotebook",
+						"dependsOn": [
+							{
+								"activity": "DataCleaning",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"notebookPath": "/Repos/s545526@nwmissouri.edu/MDW-MelbourneParkingData/Databricks/TransformNotebookP1"
+						},
+						"linkedServiceName": {
+							"referenceName": "AzureDatabricks",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/MelbourneApiDataset')]",
+				"[concat(variables('factoryId'), '/datasets/MelbourneADLS2')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureDatabricks')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MelbourneADLS2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "storagebigfiveproject",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().filename",
+							"type": "Expression"
+						},
+						"folderPath": "landing",
+						"fileSystem": "bigfiveproject"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/storagebigfiveproject')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MelbourneApiDataset')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "MelbourneRestApi",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"relativeurl": {
+							"value": "@dataset().apiurl",
+							"type": "Expression"
+						}
+					}
+				},
+				"parameters": {
+					"apiurl": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "RestResource",
+				"typeProperties": {},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/MelbourneRestApi')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDatabricks')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureDatabricks",
+				"typeProperties": {
+					"domain": "https://adb-5233910940185115.15.azuredatabricks.net",
+					"accessToken": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDatabricks_accessToken')]"
+					},
+					"existingClusterId": "[parameters('AzureDatabricks_properties_typeProperties_existingClusterId')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/MelbourneRestApi')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"parameters": {
+					"relativeurl": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "RestService",
+				"typeProperties": {
+					"url": "[parameters('MelbourneRestApi_properties_typeProperties_url')]",
+					"enableServerCertificateValidation": true,
+					"authenticationType": "Anonymous"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/storagebigfiveproject')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('storagebigfiveproject_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('storagebigfiveproject_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
