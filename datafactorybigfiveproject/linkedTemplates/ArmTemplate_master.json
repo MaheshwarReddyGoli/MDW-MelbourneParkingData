@@ -17,7 +17,7 @@
 		},
 		"AzureDatabricks_properties_typeProperties_existingClusterId": {
 			"type": "string",
-			"defaultValue": "1203-175915-gsdmd9ua"
+			"defaultValue": "1205-154949-bfi2ip21"
 		},
 		"MelbourneRestApi_properties_typeProperties_url": {
 			"type": "string",

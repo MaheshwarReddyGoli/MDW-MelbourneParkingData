@@ -17,7 +17,7 @@
 		},
 		"AzureDatabricks_properties_typeProperties_existingClusterId": {
 			"type": "string",
-			"defaultValue": "1203-175915-gsdmd9ua"
+			"defaultValue": "1205-154949-bfi2ip21"
 		},
 		"MelbourneRestApi_properties_typeProperties_url": {
 			"type": "string",
@@ -617,7 +617,7 @@
 				"annotations": [],
 				"type": "AzureDatabricks",
 				"typeProperties": {
-					"domain": "https://adb-5233910940185115.15.azuredatabricks.net",
+					"domain": "https://adb-4369008769748781.1.azuredatabricks.net",
 					"accessToken": {
 						"type": "SecureString",
 						"value": "[parameters('AzureDatabricks_accessToken')]"
