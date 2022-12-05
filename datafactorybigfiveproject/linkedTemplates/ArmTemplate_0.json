@@ -697,6 +697,26 @@
 								"type": "Expression"
 							}
 						}
+					},
+					{
+						"name": "TimeDifference",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "EndTime",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "timedifference",
+							"value": {
+								"value": "@string(div(sub(ticks(formatDateTime(variables('EndTime'))),ticks(formatDateTime(variables('StartTime')))),1000))",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -708,6 +728,9 @@
 						"type": "String"
 					},
 					"EndTime": {
+						"type": "String"
+					},
+					"timedifference": {
 						"type": "String"
 					}
 				},
