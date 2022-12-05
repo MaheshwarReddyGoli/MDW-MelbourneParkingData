@@ -486,7 +486,7 @@
 				}
 			},
 			{
-				"name": "TransformNotebookP1",
+				"name": "Bharath Notebook",
 				"type": "DatabricksNotebook",
 				"dependsOn": [
 					{
@@ -530,7 +530,25 @@
 				"type": "SetVariable",
 				"dependsOn": [
 					{
-						"activity": "TransformNotebookP1",
+						"activity": "Bharath Notebook",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Aparna Notebook",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Sanjay Notebook",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Vamsi Notebook",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -563,6 +581,87 @@
 						"value": "@string(div(sub(ticks(formatDateTime(variables('EndTime'))),ticks(formatDateTime(variables('StartTime')))),1000))",
 						"type": "Expression"
 					}
+				}
+			},
+			{
+				"name": "Sanjay Notebook",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "DataCleaning",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/s545526@nwmissouri.edu/MDW-MelbourneParkingData/Databricks/TransformNotebookP2"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Aparna Notebook",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "DataCleaning",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/s545526@nwmissouri.edu/MDW-MelbourneParkingData/Databricks/TransformNotebookP3"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Vamsi Notebook",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "DataCleaning",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/s545526@nwmissouri.edu/MDW-MelbourneParkingData/Databricks/TransformNotebookP4"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks",
+					"type": "LinkedServiceReference"
 				}
 			}
 		],
